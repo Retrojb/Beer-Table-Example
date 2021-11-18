@@ -1,4 +1,4 @@
-export const BeerTableHeadCells = [
+export const BeerTableColumns = [
     {
         id: 'name',
         label: 'Name'

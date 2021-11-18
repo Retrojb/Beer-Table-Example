@@ -3,10 +3,11 @@ import axios from 'axios';
 import { Paper, TableContainer, Table, TableCell, TableBody } from '@mui/material';
 import TableHead from '@mui/material/TableHead';
 import TableRow from '@mui/material/TableRow';
-import { BeerTableHeadCells } from '../utils/BeerTableCells';
 import { TablePagination, TableSortLabel } from '@material-ui/core';
 import { Box } from '@mui/system';
-
+import { BeerTableColumns } from '../utils/BeerTableColumns';
+import TableHeader from './TableHeader';
+import { stableSort, getCompare } from '../utils/TableSortHandler';
 const BeerTable = () => {
 
     const [ data, setData ] = useState([]);
@@ -15,7 +16,7 @@ const BeerTable = () => {
     const [ order, setOrder ] = useState('asc');
     const [ orderBy, setOrderBy ] = useState('abv');
 
-    const tableHeadRows = BeerTableHeadCells;
+    const tableHeadRows = BeerTableColumns;
     const API_URL = "https://api.punkapi.com/v2/beers?per_page=80";
 
     useEffect(() => {
@@ -41,10 +42,6 @@ const BeerTable = () => {
         setOrderBy(property);
     };
 
-    const sortHandler = (property) => {
-        
-    };
-
     const handleChangePage = (event, newPage) => {
         setPage(newPage);
     };
@@ -59,25 +56,15 @@ const BeerTable = () => {
         <Paper sx={{ width: '100%', overflow: 'hidden' }}>
             <h2>Hooray Beer</h2>
             <TableContainer component={Paper}>
-                <Table stickyHeader sx={{ minWidth: 650 }} aria-label="Beer Table">
-                    <TableHead>
-                        <TableRow>
-                            {tableHeadRows.map((row) => (
-                                <TableCell key={row.id} sortDirection={orderBy === row.id ? order : false}>
-                                    <TableSortLabel active={orderBy === row.id} direction={orderBy === row.id ? order: 'asc'} onClick={sortHandler(row.id)}>
-                                        {row.label}
-                                        {orderBy === row.id ? (
-                                            <Box component="span">
-                                                {order === 'desc' ? 'sorted descending' : 'sorted ascending' }
-                                            </Box>
-                                        ) : null }
-                                    </TableSortLabel>
-                                </TableCell>
-                            ))}
-                        </TableRow>
-                    </TableHead>
+                <Table sx={{ minWidth: 650 }} aria-label="Beer Table">
+                    <TableHeader 
+                        onRequestSort={handleTableSort}
+                        order={order}
+                        orderBy={orderBy}
+                    />
+                  
                     <TableBody>
-                        {data
+                        {stableSort(data, getCompare(order, orderBy))
                             .slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
                             .map((row) => {
                                 return (
