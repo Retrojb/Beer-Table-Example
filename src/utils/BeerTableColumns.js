@@ -1,28 +1,50 @@
 export const BeerTableColumns = [
     {
         id: 'name',
-        label: 'Name'
+        label: 'Name',
+        options: {
+            filter: true,
+            sort: true,
+        }
     },
     {
         id: 'image_url',
-        label: 'Beer Pic'
+        label: 'Beer Pic',
+        sortable: false,
+        disableSortBy: true,
     },
     {
         id: 'tagline',
-        label: 'Tagline'
+        label: 'Tagline',
+        options: {
+            filter: false,
+            sort: false,
+        }
     },
     {
         id: 'description',
-        label:'Description'
+        label:'Description',
+        options: {
+            filter: false,
+            sort: false,
+        }
     },
     {
         id: 'abv',
         numeric: true,
-        label: 'ABV'
+        label: 'ABV',
+        options: {
+            filter: true,
+            sort: true,
+        }
     },
     {
         id: 'ibu',
         numeric: true,
-        label: 'IBU'
+        label: 'IBU',
+        options: {
+            filter: true,
+            sort: true,
+        }
     },
 ]

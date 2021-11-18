@@ -1,8 +1,8 @@
 import React, { useState } from 'react'
-import { Paper, TableContainer, Table, TableCell, TableBody } from '@mui/material';
+import { TableCell } from '@mui/material';
 import TableHead from '@mui/material/TableHead';
 import TableRow from '@mui/material/TableRow';
-import { TablePagination, TableSortLabel } from '@material-ui/core';
+import { TableSortLabel } from '@material-ui/core';
 import { visuallyHidden } from '@mui/utils';
 import { Box } from '@mui/system';
 import { BeerTableColumns } from '../utils/BeerTableColumns';
@@ -13,15 +13,10 @@ const TableHeader = (props) => {
     const [ orderBy, setOrderBy ] = useState('abv');
     const tableHeadRows = BeerTableColumns;
 
-    const handleTableSort = (event, property) => {
-            const isAsc = orderBy === property && order === 'asc';
-            setOrder(isAsc ? 'desc' : 'asc');
-            setOrderBy(property);
-    };
-
     const sortHandler = (property) => (event) => {
         onRequestSort(event, property);
     };
+    
     return (
         <TableHead>
             <TableRow>

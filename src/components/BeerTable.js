@@ -1,13 +1,13 @@
 import React, { useState, useEffect } from 'react'
 import axios from 'axios';
 import { Paper, TableContainer, Table, TableCell, TableBody } from '@mui/material';
-import TableHead from '@mui/material/TableHead';
 import TableRow from '@mui/material/TableRow';
-import { TablePagination, TableSortLabel } from '@material-ui/core';
+import { TablePagination } from '@material-ui/core';
 import { Box } from '@mui/system';
 import { BeerTableColumns } from '../utils/BeerTableColumns';
 import TableHeader from './TableHeader';
 import { stableSort, getCompare } from '../utils/TableSortHandler';
+import TableFilter from './TableFilter';
 const BeerTable = () => {
 
     const [ data, setData ] = useState([]);
@@ -51,10 +51,13 @@ const BeerTable = () => {
         setPage(0);
     };
 
-    console.log(data.length)
+
     return (
         <Paper sx={{ width: '100%', overflow: 'hidden' }}>
-            <h2>Hooray Beer</h2>
+            <div>
+                <h2>Hooray Beer</h2>
+                <TableFilter />
+            </div>
             <TableContainer component={Paper}>
                 <Table sx={{ minWidth: 650 }} aria-label="Beer Table">
                     <TableHeader 
@@ -62,7 +65,6 @@ const BeerTable = () => {
                         order={order}
                         orderBy={orderBy}
                     />
-                  
                     <TableBody>
                         {stableSort(data, getCompare(order, orderBy))
                             .slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
