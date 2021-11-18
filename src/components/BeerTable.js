@@ -4,10 +4,14 @@ import { Paper, TableContainer, Table, TableCell, TableBody } from '@mui/materia
 import TableHead from '@mui/material/TableHead';
 import TableRow from '@mui/material/TableRow';
 import { BeerTableHeadCells } from '../utils/BeerTableCells';
+import { TablePagination } from '@material-ui/core';
 
 const BeerTable = () => {
 
-    const [ data, setData ] = useState(null);
+    const [ data, setData ] = useState([]);
+    const [ page, setPage ] = useState(0);
+    const [ rowsPerPage, setRowsPerPage] = useState(10);
+
     const tableHeadRows = BeerTableHeadCells;
     const API_URL = "https://api.punkapi.com/v2/beers?per_page=80";
 
@@ -28,8 +32,16 @@ const BeerTable = () => {
         }
     }, []);
 
-    console.log('We got beer', tableHeadRows);
+    const handleChangePage = (event, newPage) => {
+        setPage(newPage);
+    };
 
+    const handleRowsPerChange = (event) => {
+        setRowsPerPage(parseInt(event.target.value, 10));
+        setPage(0);
+    };
+
+    console.log(data.length)
     return (
         <div>
             <h2>Hooray Beer</h2>
@@ -43,19 +55,45 @@ const BeerTable = () => {
                         </TableRow>
                     </TableHead>
                     <TableBody>
-                        {data.map((tableRow) => (
-                            <TableRow key={tableRow.id}>
-                                <TableCell>{tableRow.name}</TableCell>
-                                <TableCell>{tableRow.image_url}</TableCell>
-                                <TableCell>{tableRow.tagline}</TableCell>
-                                <TableCell>{tableRow.description}</TableCell>
-                                <TableCell>{tableRow.abv}</TableCell>
-                                <TableCell>{tableRow.ibu}</TableCell>
-                            </TableRow>
-                        ))}
+                        {data
+                            .slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
+                            .map((row) => {
+                                return (
+                                    <TableRow 
+                                        hover 
+                                        role="checkbox" 
+                                        tabIndex={-1} 
+                                        key={row.id} 
+                                        sx={{ '&:last-child td, &:last-child th': { border: 0 } }}
+                                    >
+                                    {tableHeadRows.map((column) => {
+                                        const value = row[column.id];
+                                        return (
+                                            <TableCell key={column.id} align="left">
+                                                {column.format &&  typeof value === 'number'
+                                                ? column.format(value): value
+                                                }
+                                            </TableCell>
+                                        )
+                                    })}
+                                </TableRow>
+                            )
+                        })
+                        }
                     </TableBody>
                 </Table>
             </TableContainer>
+            <TablePagination
+                rowsPerPage={rowsPerPage}
+                rowsPerPageOptions={[10,25,50,100]}
+                component="div"
+                page={page}
+                onPageChange={handleChangePage}
+                onRowsPerPageChange={handleRowsPerChange}
+                count={data.length}
+            >
+
+            </TablePagination>
         </div>
     )
 }
