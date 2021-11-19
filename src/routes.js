@@ -1,5 +1,5 @@
-import React, { Fragment } from "react";
-import { Routes, Route } from "react-router";
+import React, { Component, Fragment } from "react";
+import { Routes, Route, Switch } from "react-router";
 import BeerCard from "./components/Cards/BeerCard";
 import BeerTable from "./components/Tables/BeerTable";
 import Home from "./pages/Home";
@@ -7,35 +7,55 @@ import Home from "./pages/Home";
 
 const ROUTES = [
     {
-        path: "/",
-        key: "app",
-        component: Home
-    },
-    {
-        path: "/beer-table",
-        key: "beer-table",
-        component: BeerTable
-    },
-    {
-        path: "/beers/:id",
-        id: "",
-        key: "beer:id",
-        component: BeerCard
+        path: "/app",
+        key: "APP",
+        component: RenderRoutes,
+        routes: [
+            {
+                path: "/",
+                key: "0",
+                component: Home
+            },
+            {
+                path: "/beer-table",
+                key: "1",
+                component: BeerTable
+            },
+            {
+                path: "/beers/:id",
+                key: "2",
+                id: ":id",
+                component: BeerCard
+            }
+
+        ]
     }
 ];
 
-export function RenderRoutes(ROUTES) {
-    let routing = ROUTES.routes
-    console.log(routing);
+export function RouteWithSubRoute (route) {
+    return (
+        <Route 
+            path={route.path} 
+            key={route.key}
+            render={(props)=>  <route.component { ...props} routes={route.routes} /> } 
+        />
+    );
+}
+
+export function RenderRoutes({ routes }) {
+    console.log(routes);
     return (
         <Routes>
-            {routing.map((route, index) => {
-                return (
+            {routes.map((route, ind) => {
+                const fixed = route.routes;
+                console.log(fixed)
+                 return (
                     <Route 
-                        path={route.path} 
-                        key={route.key}
-                        render={(props)=> { <route.component { ...props} routes={route.routes} /> }} />
-                )
+                        path={fixed.path} 
+                        key={ind}
+                        render={ props =>  <routes.Component { ...props} routes={route.routes} /> } 
+                    />
+                );
             })}
         </Routes>
 

@@ -8,6 +8,8 @@ import BeerCard from '../Cards/BeerCard';
 import TableHeader from './TableHeader';
 import { stableSort, getCompare } from '../../utils/TableSortHandler';
 import TableFilter from './TableFilter';
+import TableSearch from './TableSearch';
+import TableToolbarRow from './TableToolbarRow';
 const BeerTable = () => {
 
     const [ data, setData ] = useState([]);
@@ -74,7 +76,7 @@ const BeerTable = () => {
         <Paper sx={{ width: '100%', overflow: 'hidden' }}>
             <div>
                 <h2>Hooray Beer</h2>
-                <TableFilter />
+                <TableToolbarRow />
             </div>
             <TableContainer component={Paper}>
                 <Table sx={{ minWidth: 650 }} aria-label="Beer Table">
@@ -122,7 +124,6 @@ const BeerTable = () => {
                 onRowsPerPageChange={handleRowsPerChange}
                 count={data.length}
             >
-
             </TablePagination>
         </Paper>
     )

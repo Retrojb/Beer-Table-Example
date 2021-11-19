@@ -38,8 +38,8 @@ const TableFilter = () => {
         setIsChecked({ [name]: event.target.value });
     }
     return (
-        <div>
-            <Button onClick={handleFilterClick} variant="outlined">
+        <>
+            <Button onClick={handleFilterClick} variant="contained">
                 <FilterListIcon />
                 <span>Filters</span>
                 {toggleFilterButtonArrowDirection()}
@@ -86,7 +86,7 @@ const TableFilter = () => {
                 )}               
                 </Popper>
             </Dialog>
-        </div>
+        </>
     )
 }
 
