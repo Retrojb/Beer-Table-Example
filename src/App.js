@@ -1,6 +1,6 @@
 import './App.css';
-import BeerTable from './components/BeerTable.js';
-import NavBar from './components/NavBar';
+import BeerTable from './components/Tables/BeerTable.js';
+import NavBar from './components/Shared/NavBar';
 
 function App() {
 

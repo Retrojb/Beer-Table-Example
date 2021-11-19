@@ -5,7 +5,7 @@ import TableRow from '@mui/material/TableRow';
 import TableSortLabel from '@mui/material/TableSortLabel';
 import { visuallyHidden } from '@mui/utils';
 import { Box } from '@mui/system';
-import { BeerTableColumns } from '../utils/BeerTableColumns';
+import { BeerTableColumns } from '../../utils/BeerTableColumns';
 
 const TableHeader = (props) => {
     const { onRequestSort } = props;

@@ -3,11 +3,10 @@ import axios from 'axios';
 import { Paper, TableContainer, Table, TableCell, TableBody } from '@mui/material';
 import TableRow from '@mui/material/TableRow';
 import TablePagination from '@mui/material/TablePagination';
-import { Box } from '@mui/system';
-import { BeerTableColumns } from '../utils/BeerTableColumns';
-import BeerCard from './BeerCard';
+import { BeerTableColumns } from '../../utils/BeerTableColumns';
+import BeerCard from '../Cards/BeerCard';
 import TableHeader from './TableHeader';
-import { stableSort, getCompare } from '../utils/TableSortHandler';
+import { stableSort, getCompare } from '../../utils/TableSortHandler';
 import TableFilter from './TableFilter';
 const BeerTable = () => {
 
