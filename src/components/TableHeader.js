@@ -2,7 +2,7 @@ import React, { useState } from 'react'
 import { TableCell } from '@mui/material';
 import TableHead from '@mui/material/TableHead';
 import TableRow from '@mui/material/TableRow';
-import { TableSortLabel } from '@material-ui/core';
+import TableSortLabel from '@mui/material/TableSortLabel';
 import { visuallyHidden } from '@mui/utils';
 import { Box } from '@mui/system';
 import { BeerTableColumns } from '../utils/BeerTableColumns';

@@ -2,9 +2,10 @@ import React, { useState, useEffect } from 'react'
 import axios from 'axios';
 import { Paper, TableContainer, Table, TableCell, TableBody } from '@mui/material';
 import TableRow from '@mui/material/TableRow';
-import { TablePagination } from '@material-ui/core';
+import TablePagination from '@mui/material/TablePagination';
 import { Box } from '@mui/system';
 import { BeerTableColumns } from '../utils/BeerTableColumns';
+import BeerCard from './BeerCard';
 import TableHeader from './TableHeader';
 import { stableSort, getCompare } from '../utils/TableSortHandler';
 import TableFilter from './TableFilter';
@@ -15,6 +16,9 @@ const BeerTable = () => {
     const [ rowsPerPage, setRowsPerPage] = useState(10);
     const [ order, setOrder ] = useState('asc');
     const [ orderBy, setOrderBy ] = useState('abv');
+    const [ modalInfo, setModalInfo ] = useState([]);
+    const [ showModal, setShowModal ] = useState(false);
+    const [ show, setShow ] = useState(false);
 
     const tableHeadRows = BeerTableColumns;
     const API_URL = "https://api.punkapi.com/v2/beers?per_page=80";
@@ -51,7 +55,22 @@ const BeerTable = () => {
         setPage(0);
     };
 
+    const handleShowBeerCard = (event) => {
+        return <BeerCard  />
+    };
+    const handleCloseModal = () => {
+        setShow(false);
+    }
 
+    const handleOpenModal = () => {
+        setShow(true);
+    }
+
+    const rowEvents = {
+        onClick: (e, row) => {
+            console.log(row);
+        }
+    }
     return (
         <Paper sx={{ width: '100%', overflow: 'hidden' }}>
             <div>
@@ -75,12 +94,13 @@ const BeerTable = () => {
                                         role="checkbox" 
                                         tabIndex={-1} 
                                         key={row.id} 
+                                        rowevents={rowEvents}
                                         sx={{ '&:last-child td, &:last-child th': { border: 0 } }}
                                     >
                                     {tableHeadRows.map((column) => {
                                         const value = row[column.id];
                                         return (
-                                            <TableCell key={column.id} align="left">
+                                            <TableCell key={column.id} align="left" rowevents={rowEvents}>
                                                 {column.format &&  typeof value === 'number'
                                                 ? column.format(value): value
                                                 }

@@ -1,12 +1,15 @@
 import React, { useState } from 'react'
 import { Checkbox, Dialog, Fade, FormControlLabel, FormGroup } from '@mui/material'
 import { Paper } from '@mui/material'
-import { Button, Popper, Typography } from '@material-ui/core';
+import Popper from '@mui/material/Popper';
+import Typography from '@mui/material/Typography';
+import Button from '@mui/material/Button';
+
 import ClickAwayListener from '@mui/base/ClickAwayListener';
 import FilterListIcon from '@mui/icons-material/FilterList';
 import KeyboardArrowDownIcon from '@mui/icons-material/KeyboardArrowDown';
 import KeyboardArrowRightIcon from '@mui/icons-material/KeyboardArrowRight';
-import zIndex from '@material-ui/core/styles/zIndex';
+
 const TableFilter = () => {
 
     const [ anchorEl, setAnchorEl ] = useState();
