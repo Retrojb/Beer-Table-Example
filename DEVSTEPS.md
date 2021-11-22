@@ -10,6 +10,8 @@
             (React Router Doc)[https://reactrouter.com/docs/en/v6/api]
         - React Testing Library `npm install --save-dev @testing-library/react`
             (React Testing Lib)[https://testing-library.com/docs/react-testing-library/intro/]
+        - React Redux `npm install @reduxjs/toolkit react-redux`
+            (React Redux)[https://react-redux.js.org/]
         
     Index.js changes:
         - Removed 'Strict Mode', will add back later once Router is working
@@ -20,38 +22,36 @@
         Using Axios GET method to fetch data from endpoint `https://api.punkapi.com/v2/beers?per_page=80`
         Check that the response status is 200 and return just the data of the call
 
-    Project Todos:
-        [] Beer Pic display in table h:60px w:50px
-        [] Add page not found / 404 Page
-        [] Condense Description to 2 lines
-            [] On hover or expand display the rest
-        [] Set up NavBar
-            [] Add Nav menu routing
+## Project Todos:
+    - Tools & Utils
+        - Add Search
+            [X] Create Table Search Component
+            [] Figure Out search functions
+        - Add Table Filters
+            [X] Add Table Filter
+            [] add padding to Paper
+        - Add Pagination
+            [X] Add Table Pagination
+            [] Change Pagination Style
+                [] Center of table footer
+        - Add Table Toolbar
+            [X] Add Table Toolbar
+                [X] Move Filter in toolbar
+                [X] Move Search in toolbar
         [] Fix sort button to rotate on desc / asc
         [] Fix Filter to filter by
             [] if has lactose
             [] if has dry hops (added at the end of brewing)
-            [] filter by beer type (lager, porter, IPA...)
-        [] Add Search
-        [X] Add Table Pagination
-        [X] Add Table Filter
-        [] Add Table Toolbar
-            [] Move Filter in toolbar
-            [] Move Search in toolbar
-        [] Add Redux Store (differnt branch)
-            [] decouple API calls from pages
+            [] filter by beer type (lager, porter, IPA...)    
+
+    - Components
+        [] Add some loading pages
+        [] Add page not found / 404 Page
         [] Make a table using MUI datagrid
-        [] Find more beer APIs
         [] App Header
+            [] Nav Menu
+            [] Mock Login Modal
         [] App Footer
-        [] Add tests
-            [] Axios API test
-            [] Sort test
-            [] Filter test
-            [] Router Test
-        [] Check responsiveness
-        [] Fix Styling
-        [] Add Darkmode Toggle
         [] Make a Beer card list
         [] Beer Card pops up on clicking a row
             [] Click off Listner
@@ -63,5 +63,37 @@
                 [] Expanded for other ingredients
         [] Count Down to beer timer on Home Page
             [] Allow user to set a time to have a beer
+        [] Beer Table Component changes:
+            [] Beer Pic display in table h:60px w:50px
+            [] Condense Description to 2 lines
+            [] On hover or expand display the rest
+            [] Pad page sides 
+
+    - Services
+        [] Add Redux Store (differnt branch)
+            [] decouple API calls from pages
+        [] Find more beer APIs
+
+    - Routing
+        [] Set up NavBar
+        [] Add Nav menu routing
+        [] Go To beer by ID 
+        
+    - Styling
+        [] Check responsiveness
+        [] Fix Styling
+        [] Add Darkmode Toggle
         [] Add some animation
-        [] Add some loading pages
+        
+    - Testing
+        [] Add  component tests
+        [] Axios API test
+        [] Sort test
+        [] Filter test
+        [] Router Test
+        
+        
+        
+        
+        
+        

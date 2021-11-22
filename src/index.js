@@ -3,12 +3,30 @@ import ReactDOM from 'react-dom';
 import './index.css';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
-import { BrowserRouter } from 'react-router-dom';
+import { BrowserRouter, Routes, Route } from 'react-router-dom';
+import TablePage from './pages/TablePage';
+import Home from './pages/Home';
+import PageNotFound from './pages/PageNotFound';
+import BeerCard from './components/Cards/BeerCard';
+import { Provider } from 'react-redux';
+import store from './store/store';
 
 ReactDOM.render(
-  <BrowserRouter>
-    <App />
-  </BrowserRouter>,
+  <Provider store={store}>
+    <BrowserRouter>
+      <Routes>
+        <Route path="/app" element={<App />}>
+          <Route path="home" element={ <Home /> } />
+          <Route path="tables" element={ <TablePage />}>
+            <Route path=":beerId" element={ <BeerCard /> }/>
+          </Route>
+
+          <Route path="*" element={ <PageNotFound /> } />
+        </Route>
+      </Routes>
+    </BrowserRouter>
+  </Provider>
+  ,
   document.getElementById('root')
 );
 

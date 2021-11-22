@@ -67,11 +67,14 @@ const BeerTable = () => {
         setShow(true);
     }
 
-    const rowEvents = {
-        onClick: (e, row) => {
-            console.log(row);
-        }
+    const rowEvents = (e, row) => {
+            console.log(e)
+            console.log(e.row);
     }
+
+    console.log("Table Columns being passed", tableHeadRows);
+    console.log("Data to check the image URL", data);
+
     return (
         <Paper sx={{ width: '100%', overflow: 'hidden' }}>
             <div>
@@ -95,7 +98,7 @@ const BeerTable = () => {
                                         role="checkbox" 
                                         tabIndex={-1} 
                                         key={row.id} 
-                                        rowevents={rowEvents}
+                                        onClick={rowEvents}
                                         sx={{ '&:last-child td, &:last-child th': { border: 0 } }}
                                     >
                                     {tableHeadRows.map((column) => {

@@ -1,4 +1,5 @@
-import React, { useState } from 'react'
+import React, { useState } from 'react';
+import { Link } from "react-router-dom";
 import { styled, alpha } from '@mui/material/styles';
 import AppBar from '@mui/material/AppBar';
 import Box from '@mui/material/Box';
@@ -34,15 +35,19 @@ const NavBar = () => {
     const renderMenu = (
         <Menu
             anchorEl={anchorEl}
-            anchorOrigin={{ vertical: 'top', horizontal: 'left' }}
+            anchorOrigin={{ vertical: 'bottom', horizontal: 'left' }}
             id="nav-bar-menu"
             keepMounted
-            transformOrigin={{ vertical: 'top', horizontal: 'left' }}
+            transformOrigin={{ vertical: 'bottom', horizontal: 'left' }}
             open={isMenuOpen}
             onClose={handleMenuClosed}
         >
-            <MenuItem onClick={handleMenuClosed}>Home</MenuItem>
-            <MenuItem onClick={handleMenuClosed}>Beer Table</MenuItem>
+            <MenuItem>
+                <Link to="/app/home">Home</Link>
+            </MenuItem>
+            <MenuItem>
+                <Link to="/app/tables">Data Tables</Link>
+            </MenuItem>
         </Menu>
     );
 
@@ -68,7 +73,9 @@ const NavBar = () => {
                         component="div" 
                         sx={{ display: { xs: 'none', sm: 'block' } }}
                     >
-                        John's World of Beer
+                        <Link to="/app/home" style={{ "textDecoration": "none" }}>
+                            John's World of Beer
+                        </Link>
                     </Typography>
                 </Toolbar>
             </AppBar>
