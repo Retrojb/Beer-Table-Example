@@ -22,7 +22,9 @@ const useStyle = makeStyles((theme) => {
             
         },
         appbar: {
-            width: `calc(100%)`,
+            width: `calc(100%)`, 
+            position: 'static',
+            marginBottom: '1rem',  
         },
         menu: {
             padding: '1rem',
@@ -98,7 +100,7 @@ const NavBar = () => {
 
     return (
         <Box sx={{ flexGrow: 1}} >
-            <AppBar position="static">
+            <AppBar className={classes.appbar}>
                 <Toolbar>
                     <MenuItem onClick={handleOpenMenu}>
                         <IconButton
