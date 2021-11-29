@@ -12,7 +12,7 @@ import MenuItem from '@mui/material/MenuItem';
 import Menu from '@mui/material/Menu';
 import MenuIcon from '@mui/icons-material/Menu';
 import SportsBarIcon from '@mui/icons-material/SportsBar';
-import { Divider, List, Paper, ListItem, Stack, MenuList, Popper, Grow } from '@mui/material';
+import { Divider, List, Paper, ListItem, Stack, MenuList, Popper, Grow, Button } from '@mui/material';
 import ClickAwayListener from '@mui/material/ClickAwayListener';
 
 const useStyle = makeStyles((theme) => {
@@ -46,6 +46,10 @@ const NavBar = () => {
 
     const handleOpenMenu = (event) => {
         setAnchorEl(event.currentTarget);
+    }
+
+    const onAppTitleClick= () => {
+        window.location.pathname='/app/home'
     }
 
     const renderMenu = (
@@ -114,17 +118,14 @@ const NavBar = () => {
                         </IconButton>
                     </MenuItem>
                     <Box sx={{ flexGrow: 1 }} />
-                    <Typography 
-                        variant="h6" 
-                        noWrap 
-                        component="div" 
-                        sx={{ display: { xs: 'none', sm: 'block' } }}
+                    <Button 
+                        variant="contained" 
+                        disableElevation 
+                        startIcon={<SportsBarIcon />} 
+                        onClick={onAppTitleClick}
                     >
-                        <Link to="/app/home" style={{ "textDecoration": "none" }}>
-                            <SportsBarIcon />
-                            John's World of Beer
-                        </Link>
-                    </Typography>
+                        John's World of Beer
+                    </Button>
                 </Toolbar>
             </AppBar>
             {renderMenu}
