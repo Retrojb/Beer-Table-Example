@@ -4,12 +4,12 @@ import { Paper, TableContainer, Table, TableCell, TableBody } from '@mui/materia
 import TableRow from '@mui/material/TableRow';
 import TablePagination from '@mui/material/TablePagination';
 import { BeerTableColumns } from '../../utils/BeerTableColumns';
-import BeerCard from '../Cards/BeerCard';
-import TableHeader from './TableHeader';
+import BeerCard from '../cards/BeerCard';
+import TableHeader from './utils/TableHeader';
 import { stableSort, getCompare } from '../../utils/TableSortHandler';
-import TableFilter from './TableFilter';
-import TableSearch from './TableSearch';
-import TableToolbarRow from './TableToolbarRow';
+import TableFilter from './utils/TableFilter';
+import TableSearch from './utils/TableSearch';
+import TableToolbarRow from './utils/TableToolbarRow';
 const BeerTable = () => {
 
     const [ data, setData ] = useState([]);
@@ -17,6 +17,7 @@ const BeerTable = () => {
     const [ rowsPerPage, setRowsPerPage] = useState(10);
     const [ order, setOrder ] = useState('asc');
     const [ orderBy, setOrderBy ] = useState('abv');
+    const [ pageSize ,setPageSize] = useState(10);
     const [ modalInfo, setModalInfo ] = useState([]);
     const [ showModal, setShowModal ] = useState(false);
     const [ show, setShow ] = useState(false);
@@ -79,9 +80,9 @@ const BeerTable = () => {
         <Paper sx={{ width: '100%', overflow: 'hidden' }}>
             <div>
                 <h2>Hooray Beer</h2>
-                <TableToolbarRow />
             </div>
             <TableContainer component={Paper}>
+                <TableToolbarRow />
                 <Table sx={{ minWidth: 650 }} aria-label="Beer Table">
                     <TableHeader 
                         onRequestSort={handleTableSort}
@@ -97,14 +98,14 @@ const BeerTable = () => {
                                         hover 
                                         role="checkbox" 
                                         tabIndex={-1} 
-                                        key={row.id} 
+                                        key={row.field} 
                                         onClick={rowEvents}
                                         sx={{ '&:last-child td, &:last-child th': { border: 0 } }}
                                     >
                                     {tableHeadRows.map((column) => {
-                                        const value = row[column.id];
+                                        const value = row[column.field];
                                         return (
-                                            <TableCell key={column.id} align="left" rowevents={rowEvents}>
+                                            <TableCell key={column.field} align="left">
                                                 {column.format &&  typeof value === 'number'
                                                 ? column.format(value): value
                                                 }
@@ -124,6 +125,7 @@ const BeerTable = () => {
                 component="div"
                 page={page}
                 onPageChange={handleChangePage}
+                onPageSizeChange={(newPageSize) => setPageSize(newPageSize)}
                 onRowsPerPageChange={handleRowsPerChange}
                 count={data.length}
             >

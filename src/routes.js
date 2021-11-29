@@ -1,8 +1,8 @@
 import React, { Component, Fragment } from "react";
 import { Routes, Route, Switch } from "react-router";
-import BeerCard from "./components/Cards/BeerCard";
-import BeerTable from "./components/Tables/BeerTable";
-import Home from "./pages/Home";
+import BeerCard from "./components/cards/BeerCard";
+import BeerTable from "./components/tables/BeerTable";
+import Home from "./views/Home";
 
 
 const ROUTES = [

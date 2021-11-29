@@ -1,8 +1,8 @@
 import './App.css';
-import BeerTable from './components/Tables/BeerTable.js';
-import NavBar from './components/Shared/NavBar';
+import NavBar from './components/shared/NavBar';
 import ROUTES, { RenderRoutes } from './routes';
 import { Outlet } from 'react-router';
+import Footer from './components/shared/Footer';
 
 function App() {
   console.log(ROUTES)
@@ -10,6 +10,7 @@ function App() {
     <>
       <NavBar />
         <Outlet />
+      <Footer />
     </>
   );
 }

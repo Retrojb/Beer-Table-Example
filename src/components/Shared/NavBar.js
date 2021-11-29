@@ -1,27 +1,41 @@
 import React, { useState } from 'react';
 import { Link } from "react-router-dom";
+import { makeStyles } from '@mui/styles';
+
 import { styled, alpha } from '@mui/material/styles';
 import AppBar from '@mui/material/AppBar';
 import Box from '@mui/material/Box';
 import Toolbar from '@mui/material/Toolbar';
 import IconButton from '@mui/material/IconButton';
 import Typography from '@mui/material/Typography';
-import InputBase from '@mui/material/InputBase';
-import Badge from '@mui/material/Badge';
 import MenuItem from '@mui/material/MenuItem';
 import Menu from '@mui/material/Menu';
 import MenuIcon from '@mui/icons-material/Menu';
-import SearchIcon from '@mui/icons-material/Search';
+import SportsBarIcon from '@mui/icons-material/SportsBar';
+import { Divider, List, Paper, ListItem, Stack, MenuList, Popper, Grow } from '@mui/material';
+import ClickAwayListener from '@mui/material/ClickAwayListener';
 
-/*
-* @TODO:
-    add Navigation
-    make name a redirect to home
- */
+const useStyle = makeStyles((theme) => {
+    return {
+        root: {
+            display: 'flex',
+            
+        },
+        appbar: {
+            width: `calc(100%)`,
+        },
+        menu: {
+            padding: '1rem',
+            width: 'auto',
+            alignContent: 'flex-start'
+        }
+    }
+})
 const NavBar = () => {
     
     const [ anchorEl, setAnchorEl] = useState(null);
 
+    const classes = useStyle();
     const isMenuOpen = Boolean(anchorEl);
 
     const handleMenuClosed = ( ) => {
@@ -33,22 +47,53 @@ const NavBar = () => {
     }
 
     const renderMenu = (
-        <Menu
-            anchorEl={anchorEl}
-            anchorOrigin={{ vertical: 'bottom', horizontal: 'left' }}
-            id="nav-bar-menu"
-            keepMounted
-            transformOrigin={{ vertical: 'bottom', horizontal: 'left' }}
-            open={isMenuOpen}
-            onClose={handleMenuClosed}
-        >
-            <MenuItem>
-                <Link to="/app/home">Home</Link>
-            </MenuItem>
-            <MenuItem>
-                <Link to="/app/tables">Data Tables</Link>
-            </MenuItem>
-        </Menu>
+        <Stack direction="row" spacing={2} className={classes.root}>
+            <Paper>
+                <Popper 
+                    open={isMenuOpen}
+                    anchorEl={anchorEl}
+                    placement="bottom-start"
+                    transition
+                >
+                    {({ TransitionProps, placement }) =>
+                        <Grow {...TransitionProps} style={{ transformOrigin: placement === 'bottom-start' ? 'left top' : 'left bottom' }}>
+                            <Paper className={classes.menu}>
+                                <ClickAwayListener onClickAway={handleMenuClosed}>
+                                    <MenuList
+                                        
+                                        anchorOrigin={{ vertical: 'bottom', horizontal: 'left' }}
+                                        id="nav-bar-menu"
+                                        keepMounted
+                                        transformOrigin={{ vertical: 'bottom', horizontal: 'left' }}
+                                        onClose={handleMenuClosed}
+                                        className={classes.menu}
+                                    >
+                                        <Typography variant="h5">Pages </Typography>
+                                        <List component="nav">
+                                            <Divider />
+                                                <ListItem onClick={handleMenuClosed}>
+                                                    <Link to="/app/home">Home</Link>
+                                                </ListItem>
+                                            <Divider />
+                                                <MenuItem onClick={handleMenuClosed}>
+                                                    <Link to="/app/tables">Data Tables</Link>
+                                                </MenuItem>
+                                            <Divider />
+                                                <MenuItem onClick={handleMenuClosed}>
+                                                    <Link to="/app/beer-datagrid">Data Grid</Link>
+                                                </MenuItem>
+                                        </List>
+                                    </MenuList>
+                                </ClickAwayListener>
+                            </Paper> 
+                        </Grow>
+                    
+                    }
+                </Popper>
+                
+            </Paper>
+        </Stack>
+        
     );
 
     return (
@@ -74,6 +119,7 @@ const NavBar = () => {
                         sx={{ display: { xs: 'none', sm: 'block' } }}
                     >
                         <Link to="/app/home" style={{ "textDecoration": "none" }}>
+                            <SportsBarIcon />
                             John's World of Beer
                         </Link>
                     </Typography>

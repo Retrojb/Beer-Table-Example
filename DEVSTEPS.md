@@ -45,11 +45,11 @@
             [] filter by beer type (lager, porter, IPA...)    
 
     - Components
-        [] Add some loading pages
+        [] Add some loading views
         [] Add page not found / 404 Page
         [] Make a table using MUI datagrid
         [] App Header
-            [] Nav Menu
+            [x] Nav Menu
             [] Mock Login Modal
         [] App Footer
         [] Make a Beer card list
@@ -71,12 +71,12 @@
 
     - Services
         [] Add Redux Store (differnt branch)
-            [] decouple API calls from pages
+            [] decouple API calls from views
         [] Find more beer APIs
 
     - Routing
-        [] Set up NavBar
-        [] Add Nav menu routing
+        [x] Set up NavBar
+        [x] Add Nav menu routing
         [] Go To beer by ID 
         
     - Styling

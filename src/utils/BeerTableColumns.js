@@ -1,6 +1,6 @@
 export const BeerTableColumns = [
     {
-        id: 'name',
+        field: 'name',
         label: 'Name',
         options: {
             filter: true,
@@ -8,43 +8,80 @@ export const BeerTableColumns = [
         }
     },
     {
-        id: 'image_url',
+        field: 'image_url',
         label: 'Beer Pic',
-        sortable: false,
-        disableSortBy: true,
+        renderCell: (cellValue) =>  { console.log(cellValue); return (<div> <img src={cellValue.formattedValue} alt={cellValue.name} id={cellValue.id} /> </div>) }
     },
     {
-        id: 'tagline',
+        field: 'tagline',
         label: 'Tagline',
-        options: {
-            filter: false,
-            sort: false,
-        }
     },
     {
-        id: 'description',
+        field: 'description',
         label:'Description',
-        options: {
-            filter: false,
-            sort: false,
-        }
     },
     {
-        id: 'abv',
+        field: 'abv',
         numeric: true,
         label: 'ABV',
-        options: {
-            filter: true,
-            sort: true,
-        }
     },
     {
-        id: 'ibu',
+        field: 'ibu',
         numeric: true,
         label: 'IBU',
-        options: {
-            filter: true,
-            sort: true,
-        }
+    },
+]
+
+export const BeerDataGridColumns = [
+    {
+        field: 'image_url',
+        headerName: 'Image',
+        description:'Beer labels',
+        flex: 0.1,
+        sortable: false,
+        filterable: false,
+        renderCell: (cellValue) =>  { 
+            return (
+                <div> 
+                    <img 
+                        src={cellValue.formattedValue} 
+                        alt={cellValue.name} 
+                        style={{ width: 30, height: 30 }} 
+                    /> 
+                </div>
+            )}
+    },
+    {
+        field: 'name',
+        headerName: 'Name',
+        description:'Beer names',
+        flex: 0.2,
+    },
+    {
+        field: 'tagline',
+        headerName: 'Tagline',
+        flex: 0.2,
+        sortable: false,
+        filterable: false,
+    },
+    {
+        field: 'description',
+        headerName:'Description',
+        flex: 0.6,
+        sortable: false,
+    },
+    {
+        field: 'abv',
+        headerName: 'ABV',
+        description:'Alcohol By Volume',
+        flex: 0.1,
+        numeric: true,
+    },
+    {
+        field: 'ibu',
+        headerName: 'IBU',
+        description:'International Bitters Unit',
+        flex: 0.1,
+        numeric: true,
     },
 ]
