@@ -1,57 +1,28 @@
 import React, { useState, useEffect } from 'react'
-import axios from 'axios';
+import { useDispatch, useSelector } from 'react-redux';import axios from 'axios';
 import BeerTable from '../../components/tables/BeerTable';
 import { Paper } from '@mui/material';
+import { getBeers } from '../../store/actions/beersActions';
 
 const TablePage = () => {
 
-    const [ data, setData ] = useState({});
+    const dispatch = useDispatch();
+
+    const beerData  = useSelector((state) => state.beers.value);
+    const store = useSelector((state) => state.beers);
+
     const [ isLoading, setIsLoading ] = useState(false);
 
-    // let response = async () => {
-    //     let res = api.getBeers();
-    //     let resp = await res.data;
-    //     console.log('foo', resp);
-    //     setData(resp);
+    useEffect(() => {
+        dispatch(getBeers())      
+    }, 
+        [dispatch, isLoading, store.beers.value]
+    );
 
-    // } 
-
-    // useEffect(() => {
-    //    const fetchBeerTableData = async () => {
-    //        setIsLoading(true)
-    //        const results = await getBeers()
-    //        console.log('SUCCESS', results);
-    //        setData(results);
-    //        setIsLoading(false);
-    //    }
-    //    if(!isLoading) {
-    //        console.log(isLoading)
-    //     fetchBeerTableData();
-    //    }
-    // }, [setData, setIsLoading]);
-    // const API_URL = "https://api.punkapi.com/v2/beers?per_page=80";
-
-    // useEffect(() => {
-    //     try {
-    //         const fetchData = async () => {
-    //             const result = await axios.get(API_URL).then(resp => {
-    //                 if (resp.status === 200) {
-    //                     const result = resp.data;
-    //                     return result;
-    //                 }
-    //             });
-    //             setData(result);
-    //         };
-    //         fetchData();
-    //     } catch (error) {
-    //         console.log(error);
-    //     }
-    // }, []);
-
-    console.log('Data in beer page', data);
+    
     return (
         <Paper sx={{ m:3, p:2, bgcolor:'violet'}}>
-            <BeerTable />
+            <BeerTable data={beerData} />
         </Paper>
     )
 }

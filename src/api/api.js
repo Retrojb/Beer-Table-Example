@@ -8,3 +8,19 @@ const instance = axios.create({
     timeout: 1000,
 });
 
+export function fetchMockApi () {
+    try {
+        const fetchData = async () => {
+            const result = await axios.get(API_URL).then(resp => {
+                if (resp.status === 200) {
+                    const result = resp.data;
+                    return result;
+                }
+            });
+        };
+        fetchData();
+    } catch (error) {
+        console.log(error);
+    }
+}
+

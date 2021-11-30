@@ -2,18 +2,16 @@ import React, { useState } from 'react';
 import { Link } from "react-router-dom";
 import { makeStyles } from '@mui/styles';
 
-import { styled, alpha } from '@mui/material/styles';
+import { Divider, List, Paper, ListItem, Stack, MenuList, Popper, Grow, Button } from '@mui/material';
+import ClickAwayListener from '@mui/material/ClickAwayListener';
 import AppBar from '@mui/material/AppBar';
 import Box from '@mui/material/Box';
 import Toolbar from '@mui/material/Toolbar';
-import IconButton from '@mui/material/IconButton';
 import Typography from '@mui/material/Typography';
 import MenuItem from '@mui/material/MenuItem';
-import Menu from '@mui/material/Menu';
 import MenuIcon from '@mui/icons-material/Menu';
 import SportsBarIcon from '@mui/icons-material/SportsBar';
-import { Divider, List, Paper, ListItem, Stack, MenuList, Popper, Grow, Button } from '@mui/material';
-import ClickAwayListener from '@mui/material/ClickAwayListener';
+import IconButton from '@mui/material/IconButton';
 
 const useStyle = makeStyles((theme) => {
     return {
@@ -32,7 +30,8 @@ const useStyle = makeStyles((theme) => {
             alignContent: 'flex-start'
         }
     }
-})
+});
+
 const NavBar = () => {
     
     const [ anchorEl, setAnchorEl] = useState(null);
@@ -66,7 +65,6 @@ const NavBar = () => {
                             <Paper className={classes.menu}>
                                 <ClickAwayListener onClickAway={handleMenuClosed}>
                                     <MenuList
-                                        
                                         anchorOrigin={{ vertical: 'bottom', horizontal: 'left' }}
                                         id="nav-bar-menu"
                                         keepMounted
@@ -87,6 +85,10 @@ const NavBar = () => {
                                             <Divider />
                                                 <MenuItem onClick={handleMenuClosed}>
                                                     <Link to="/app/beer-datagrid">Data Grid</Link>
+                                                </MenuItem>
+                                                <Divider />
+                                                <MenuItem onClick={handleMenuClosed}>
+                                                    <Link to="/app/login">Login</Link>
                                                 </MenuItem>
                                         </List>
                                     </MenuList>

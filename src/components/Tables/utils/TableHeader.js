@@ -22,7 +22,7 @@ const TableHeader = (props) => {
             <TableRow>
                 {tableHeadRows.map((row) => (
                     <TableCell 
-                        key={row.id}
+                        key={row.key}
                         align={row.numeric ? 'right' : 'left'}
                         sortDirection={orderBy === row.id ? order : false}
                     >

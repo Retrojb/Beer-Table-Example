@@ -9,20 +9,29 @@ import Home from './views/Home';
 import PageNotFound from './views/common/PageNotFound';
 import BeerCard from './components/cards/BeerCard';
 import BeerDataGrid from './components/tables/BeerDataGrid';
+import Login from './views/common/Login';
+import Profile from './views/Profile';
+import { Provider } from 'react-redux';
+import store from './store';
 
 ReactDOM.render(
-    <BrowserRouter>
-      <Routes>
-        <Route path="/app" element={<App />}>
-          <Route path="home" element={ <Home /> } />
-          <Route path="tables" element={ <TablePage />}>
-            <Route path=":beerId" element={ <BeerCard /> }/>
-          </Route>
-          <Route path="beer-datagrid" element={ <BeerDataGrid /> } />
-          <Route path="*" element={ <PageNotFound /> } />
-        </Route>
-      </Routes>
-    </BrowserRouter>
+      <Provider store={store}>
+        <BrowserRouter>
+            <Routes>
+              <Route path="/app" element={<App />}>
+                  <Route path="profile" element={ <Profile />} />
+                <Route path="login" element={ <Login /> }>
+                </Route>
+                <Route path="home" element={ <Home /> } />
+                <Route path="tables" element={ <TablePage />}>
+                  <Route path=":beerId" element={ <BeerCard /> }/>
+                </Route>
+                <Route path="beer-datagrid" element={ <BeerDataGrid /> } />
+                <Route path="*" element={ <PageNotFound /> } />
+              </Route>
+            </Routes>
+        </BrowserRouter>
+    </Provider>
   ,
   document.getElementById('root')
 );
